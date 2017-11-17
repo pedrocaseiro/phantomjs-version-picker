@@ -1,0 +1,24 @@
+#!/bin/bash
+usage() { echo "Usage: $0 [-v <string>]" 1>&2; exit 1;  }
+
+while getopts ":v:" o; do
+  case "${o}" in
+    v)
+      v=${OPTARG}
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${v}" ]; then
+  usage
+fi
+
+echo "Current phantomjs version = ${v}"
+
+#sudo tar xvjf phantomjs-${v}-linux-x86_64.tar.bz2
+#sudo mv phantomjs-${v}-linux-x86_64 /usr/local/share
+sudo ln -sf /usr/local/share/phantomjs-${v}-linux-x86_64/bin/phantomjs /usr/local/bin
